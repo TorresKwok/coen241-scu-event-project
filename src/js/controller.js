@@ -1,15 +1,22 @@
-const recipeContainer = document.querySelector('.recipe');
+import calendarView from "./views/calendarView"
+
+const recipeContainer = document.querySelector(".recipe")
 
 const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
+	return new Promise(function (_, reject) {
+		setTimeout(function () {
+			reject(
+				new Error(`Request took too long! Timeout after ${s} second`),
+			)
+		}, s * 1000)
+	})
+}
 
-console.log('Hello World!');
+const controlCalendarIcon = function () {}
 
-// https://forkify-api.herokuapp.com/v2
+const init = function () {
+	// Publish-Subscriber Pattern (Subscriber)
+	calendarView.addHandlerClickIcon(controlCalendarIcon)
+}
 
-///////////////////////////////////////
+init()
