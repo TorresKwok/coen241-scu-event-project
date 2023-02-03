@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.checkbox-container {
+	margin: 0;
+	// background: #363636;
+	// display: -webkit-flex;
+	// display: flex;
+	align-items: center;
+}
+
+.checkbox-title {
+	padding: 3rem 0;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	padding: 50px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	font-size: x-large;
+	font-weight: bold;
+	// text-transform: uppercase;
+}
+
+.checkboxs {
+	padding: 3rem 0;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	padding: 50px;
+	padding-top: 0px;
+}
+
+.checkbox {
+	&:hover {
+		transform: scale(1.05);
+		transition: all 0.3s;
+	}
+}
+
+/*Checkboxes styles*/
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 20px;
+	font: 14px/20px "Open Sans", Arial, sans-serif;
+	// color: #ddd;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+input[type="checkbox"] + label:last-child {
+	margin-bottom: 0;
+}
+
+input[type="checkbox"] + label:before {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 20px;
+	border: 1.5px solid #f6b285;
+	position: absolute;
+	left: 0;
+	top: 0;
+	// opacity: 0.9;
+	-webkit-transition: all 0.12s, border-color 0.08s;
+	transition: all 0.12s, border-color 0.08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+	width: 10px;
+	top: -5px;
+	left: 5px;
+	border-radius: 0;
+	opacity: 1;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
