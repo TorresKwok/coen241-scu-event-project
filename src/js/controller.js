@@ -3,6 +3,7 @@ import calendarView from "./views/calendarView"
 import resultView from "./views/resultView"
 import eventView from "./views/eventView"
 import paginationView from "./views/paginationView"
+import resultHeaderView from "./views/resultHeaderView"
 import { MODAL_CLOSE_SEC } from "./config"
 
 const recipeContainer = document.querySelector(".recipe")

@@ -3,6 +3,7 @@ import { getJSON, sendJSON } from "./helper"
 
 export const state = {
 	event: {},
+	filter: {},
 	search: {
 		query: "",
 		result: [],
