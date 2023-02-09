@@ -8,6 +8,12 @@ class ResultHeaderView extends View {
 
 	constructor() {
 		super()
+		this._generateDateTag()
+	}
+
+	_generateMarkup = function () {}
+
+	_generateDateTag = function () {
 		const dateTag = this._parentElement.querySelector(".result-header-date")
 		dateTag.innerText = this._date.toLocaleDateString("en-us", {
 			year: "numeric",
@@ -16,7 +22,16 @@ class ResultHeaderView extends View {
 		})
 	}
 
-	_generateMarkup = function () {}
+	updateDate = function (newDate = this._date) {
+		this._date = newDate
+		this._generateDateTag()
+	}
+
+	addHandlerDateChange = function (handler) {
+		this._parentElement.addEventListener("click", function (e) {
+			handler(this._date)
+		})
+	}
 }
 
 export default new ResultHeaderView()

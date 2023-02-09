@@ -8,6 +8,7 @@ class CalendarView extends View {
 	_date = new Date()
 	_curYear = this._date.getFullYear()
 	_curMonth = this._date.getMonth()
+	_curDate = this._date.getDate()
 	_monthArr = [
 		"Jan",
 		"Feb",
@@ -32,7 +33,26 @@ class CalendarView extends View {
 		)
 	}
 
-	_generateMarkup() {
+	updateDate = function (newDate = Date.parse(this._date)) {
+		this._date = new Date(newDate)
+		this.render("update date")
+	}
+
+	addHandlerDateChange = function (handler) {
+		this._parentElement.addEventListener("click", e => {
+			const dayTag = e.target.closest(".day")
+			if (!dayTag || dayTag.classList.contains("inactive")) return
+
+			this._curDate = dayTag.textContent
+			this._date = new Date(this._curYear, this._curMonth, this._curDate)
+
+			this.render("render again")
+
+			handler(this._date)
+		})
+	}
+
+	_generateMarkup = function () {
 		const firstDateOfMonth = new Date(
 			this._curYear,
 			this._curMonth,
@@ -60,7 +80,9 @@ class CalendarView extends View {
 		let liTag = ""
 
 		for (let i = firstDateOfMonth; i > 0; i--) {
-			liTag += `<li class="inactive">${lastDateOfLastMonth - i + 1}</li>`
+			liTag += `<li class="day inactive">${
+				lastDateOfLastMonth - i + 1
+			}</li>`
 		}
 
 		for (let i = 1; i <= lastDateOfMonth; i++) {
@@ -68,11 +90,11 @@ class CalendarView extends View {
 				i === this._date.getDate() &&
 				this._curMonth === this._date.getMonth() &&
 				this._curYear === this._date.getFullYear()
-			liTag += `<li class=${isToday ? "active" : ""}>${i}</li>`
+			liTag += `<li class="${isToday ? "active day" : "day"}">${i}</li>`
 		}
 
 		for (let i = lastDayOfMonth; i < 6; i++) {
-			liTag += `<li class="inactive">${i - lastDayOfMonth + 1}</li>`
+			liTag += `<li class="day inactive">${i - lastDayOfMonth + 1}</li>`
 		}
 
 		return `

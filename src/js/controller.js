@@ -66,15 +66,22 @@ const controlPagination = function (goToPage) {
 
 const controlEmpthHash = function () {
 	window.addEventListener("hashchange", function () {
-		console.log("Hash changed")
 		const hash = window.location.hash
 		if (!hash) location.reload()
 	})
 }
 
+const controlCalDateChange = function (newDate) {}
+
+const controlHeaderDateChange = function (newDate) {
+	resultHeaderView.updateDate(newDate)
+}
+
 const init = function () {
 	// Publish-Subscriber Pattern (Subscriber)
 	calendarView.addHandlerClickIcon(controlCalendarIcon)
+	calendarView.addHandlerDateChange(controlHeaderDateChange)
+	resultHeaderView.addHandlerDateChange(controlCalDateChange)
 	paginationView.addHandlerClick(controlPagination)
 	eventView.addHandlerRender(controlEvent)
 	controlSearchResult()
