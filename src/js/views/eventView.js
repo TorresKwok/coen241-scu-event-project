@@ -40,7 +40,10 @@ class RecipeView extends View {
 			this._data.title
 		}" class="recipe__img" />
 			<h1 class="recipe__title">
-			<span>${this._data.title}</span>
+			<span>${
+				// this._data.title
+				"Week 7 Career Advisor Social Hour (STEM + Innovation)"
+			}</span>
 			</h1>
 		</figure>
 
@@ -50,35 +53,18 @@ class RecipeView extends View {
 					<use href="${icons}#icon-clock"></use>
 				</svg>
 			<span class="recipe__info-data recipe__info-data--minutes">${
-				this._data.cooking_time
+				// this._data.cooking_time
+				"4:30pm - 5:30pm PST"
 			}</span>
-			<span class="recipe__info-text">minutes</span>
 			</div>
 			<div class="recipe__info">
 			<svg class="recipe__info-icon">
-				<use href="${icons}#icon-users"></use>
+				<use href="${icons}#icon-location"></use>
 			</svg>
 			<span class="recipe__info-data recipe__info-data--people">${
-				this._data.servings
+				// this._data.servings
+				"SCDI North Lobby"
 			}</span>
-			<span class="recipe__info-text">servings</span>
-
-			<div class="recipe__info-buttons">
-				<button data-update-to="${
-					this._data.servings - 1
-				}" class="btn--tiny btn--update-servings">
-				<svg>
-					<use href="${icons}#icon-minus-circle"></use>
-				</svg>
-				</button>
-				<button data-update-to="${
-					this._data.servings + 1
-				}" class="btn--tiny btn--update-servings">
-				<svg>
-					<use href="${icons}#icon-plus-circle"></use>
-				</svg>
-				</button>
-			</div>
 		</div>
 		<div class="recipe__user-generated ${this._data.key ? "" : "hidden"}">
 			<svg>
