@@ -36,9 +36,10 @@ class RecipeView extends View {
 	_generateMarkup = function () {
 		return `
 		<figure class="recipe__fig">
-			<img src=${this._data.image_url} alt="${
-			this._data.title
-		}" class="recipe__img" />
+			<img src=${
+				// this._data.image_url
+				"https://res.cloudinary.com/scuwebdev/image/upload/v1634224593/scu-stem-building-courtyard-04_cglfdm.jpg"
+			} alt="${this._data.title}" class="recipe__img" />
 			<h1 class="recipe__title">
 			<span>${
 				// this._data.title
@@ -79,30 +80,23 @@ class RecipeView extends View {
 		</div>
 
 		<div class="recipe__ingredients">
-			<h2 class="heading--2">Recipe ingredients</h2>
-			<ul class="recipe__ingredient-list">
-
-			${this._data.ingredients.map(this._generateMarkupIngredient).join("")}
-			
-
-			<li class="recipe__ingredient">
-				<svg class="recipe__icon">
-				<use href="${icons}#icon-check"></use>
-				</svg>
-				<div class="recipe__quantity">0.5</div>
-				<div class="recipe__description">
-				<span class="recipe__unit">cup</span>
-				ricotta cheese
-				</div>
-			</li>
-			</ul>
+			<h2 class="heading--2">Event Infomation</h2>
+			<p class="news__txt">
+            	Utilizing text from government documents, declarations, and other institutional communications artist Bryan Ida creates life-sized portraits in which the linework is his actual handwritten transcription of the sentences and phrases from the selected documents.
+          	</p>
+			<br>
+			<p class="news__txt">
+            	The con.Text series relates these historical events and documents to the lives of the individuals depicted. Each person portrayed is connected to the text used to create their portrait either through direct impact or generational effects of policies.
+          	</p>
 		</div>
 
 		<div class="recipe__directions">
-			<h2 class="heading--2">How to cook it</h2>
+			<h2 class="heading--2">More about it</h2>
 			<p class="recipe__directions-text">
-			This recipe was carefully designed and tested by
-			<span class="recipe__publisher">${this._data.publisher}</span>. Please check out
+			This event was hosted by
+			<span class="recipe__publisher">${
+				this._data.publisher
+			}</span>. For more information about this event, please check out
 			directions at their website.
 			</p>
 			<a
