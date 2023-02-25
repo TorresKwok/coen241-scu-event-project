@@ -414,23 +414,14 @@
 					<form action="#">
 						<div class="upload-form first">
 							<div class="details personal">
-								<div class="title">Personal Details</div>
+								<div class="title">Host Details</div>
 
 								<div class="fields">
 									<div class="input-field">
-										<label>Full Name</label>
+										<label>Host Name</label>
 										<input
 											type="text"
-											placeholder="Enter your name"
-											required
-										/>
-									</div>
-
-									<div class="input-field">
-										<label>Date of Birth</label>
-										<input
-											type="date"
-											placeholder="Enter birth date"
+											placeholder="Enter host name"
 											required
 										/>
 									</div>
@@ -439,7 +430,7 @@
 										<label>Email</label>
 										<input
 											type="text"
-											placeholder="Enter your email"
+											placeholder="Enter host email"
 											required
 										/>
 									</div>
@@ -452,72 +443,37 @@
 											required
 										/>
 									</div>
-
-									<div class="input-field">
-										<label>Gender</label>
-										<select required>
-											<option disabled selected>
-												Select gender
-											</option>
-											<option>Male</option>
-											<option>Female</option>
-											<option>Others</option>
-										</select>
-									</div>
-
-									<div class="input-field">
-										<label>Occupation</label>
-										<input
-											type="text"
-											placeholder="Enter your ccupation"
-											required
-										/>
-									</div>
 								</div>
 							</div>
 
 							<div class="details ID">
-								<span class="title">Identity Details</span>
+								<span class="title">Event Details</span>
 
 								<div class="fields">
 									<div class="input-field">
-										<label>ID Type</label>
+										<label>Event Name</label>
 										<input
 											type="text"
-											placeholder="Enter ID type"
+											placeholder="Enter Event Name"
 											required
 										/>
 									</div>
 
 									<div class="input-field">
-										<label>ID Number</label>
-										<input
-											type="number"
-											placeholder="Enter ID number"
-											required
-										/>
+										<label>Event Location</label>
+										<select required>
+											<option disabled selected>
+												Select Location
+											</option>
+											<option>SCDI Lobby</option>
+											<option>Library</option>
+											<option>SCU Church</option>
+											<option>Lucas Hall</option>
+										</select>
 									</div>
 
 									<div class="input-field">
-										<label>Issued Authority</label>
-										<input
-											type="text"
-											placeholder="Enter issued authority"
-											required
-										/>
-									</div>
-
-									<div class="input-field">
-										<label>Issued State</label>
-										<input
-											type="text"
-											placeholder="Enter issued state"
-											required
-										/>
-									</div>
-
-									<div class="input-field">
-										<label>Issued Date</label>
+										<label>Event Date</label>
 										<input
 											type="date"
 											placeholder="Enter your issued date"
@@ -526,10 +482,37 @@
 									</div>
 
 									<div class="input-field">
-										<label>Expiry Date</label>
+										<label>Event Duration</label>
 										<input
-											type="date"
-											placeholder="Enter expiry date"
+											type="text"
+											placeholder="Enter Event Duration (in hour)"
+											required
+										/>
+									</div>
+
+									<div class="input-field">
+										<label>Event Image</label>
+										<input
+											type="text"
+											placeholder="Enter Image URL"
+											required
+										/>
+									</div>
+
+									<div class="input-field">
+										<label>Event Profile Photo</label>
+										<input
+											type="text"
+											placeholder="Enter Profile Photo URL"
+											required
+										/>
+									</div>
+
+									<div class="input-field input-field-description">
+										<label>Event Description</label>
+										<input
+											type="text"
+											placeholder="Enter Event Description"
 											required
 										/>
 									</div>

@@ -23,8 +23,14 @@ class ResultView extends View {
 						<img src="${result.image_url}" alt="Test" />
 					</figure>
 					<div class="preview__data">
-						<h4 class="preview__title">${result.title}</h4>
-						<p class="preview__publisher">${result.publisher}</p>
+						<h4 class="preview__title">${
+							// result.title
+							"CAREER ADVISOR SOCIAL HOUR (STEM + INNOVATION)"
+						}</h4>
+						<p class="preview__publisher">${
+							// result.publisher
+							"School of Engineering"
+						}</p>
 					</div>
 					<div class="preview__user-generated ${result.key ? "" : "hidden"}">
 						<svg>

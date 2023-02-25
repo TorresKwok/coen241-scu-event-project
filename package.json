@@ -2,10 +2,9 @@
 	"name": "scu-event-app",
 	"version": "1.0.0",
 	"description": "",
-  "default": "index.html",
 	"scripts": {
 		"start": "parcel index.html",
-		"build": "parcel build index.html --dist-dir ./dist"
+		"build": "parcel build index.html"
 	},
 	"author": "Torres Kwok",
 	"license": "ISC",

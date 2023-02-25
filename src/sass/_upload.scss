@@ -176,6 +176,13 @@
 	flex-direction: column;
 	margin: 4px 0;
 }
+.fields .input-field-description {
+	display: flex;
+	width: calc(100%);
+	flex-direction: column;
+	margin: 4px 0;
+}
+
 .input-field label {
 	font-size: 12px;
 	font-weight: 500;
@@ -193,6 +200,11 @@ select {
 	height: 42px;
 	margin: 8px 0;
 }
+
+.input-field-description input {
+	height: 70px;
+}
+
 .input-field input :focus,
 .input-field select:focus {
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
