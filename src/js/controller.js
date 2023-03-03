@@ -6,6 +6,7 @@ import paginationView from "./views/paginationView"
 import resultHeaderView from "./views/resultHeaderView"
 import uploadEventView from "./views/uploadEventView"
 import { MODAL_CLOSE_SEC } from "./config"
+import { getJSON, sendJSON } from "./helper"
 
 const recipeContainer = document.querySelector(".recipe")
 
