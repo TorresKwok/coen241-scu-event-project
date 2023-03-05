@@ -13,6 +13,7 @@
 		"parcel": "^2.8.3"
 	},
 	"dependencies": {
+		"cors": "^2.8.5",
 		"fractional": "^1.0.0"
 	}
 }

@@ -32,11 +32,13 @@
 	<body>
 		<div class="container">
 			<header class="header">
-				<img
-					src="src/img/broncoLogo.png"
-					alt="Logo"
-					class="header__logo"
-				/>
+				<a href="/">
+					<img
+						src="src/img/broncoLogo.png"
+						alt="Logo"
+						class="header__logo"
+					/>
+				</a>
 				<form class="search">
 					<input
 						type="text"
@@ -414,7 +416,7 @@
 					<form action="#">
 						<div class="upload-form first">
 							<div class="details personal">
-								<div class="title">Host Details</div>
+								<div class="title">Host Contact Details</div>
 
 								<div class="fields">
 									<div class="input-field">
@@ -427,7 +429,7 @@
 									</div>
 
 									<div class="input-field">
-										<label>Email</label>
+										<label>Host Email</label>
 										<input
 											type="text"
 											placeholder="Enter host email"
@@ -508,7 +510,9 @@
 										/>
 									</div>
 
-									<div class="input-field input-field-description">
+									<div
+										class="input-field input-field-description"
+									>
 										<label>Event Description</label>
 										<input
 											type="text"

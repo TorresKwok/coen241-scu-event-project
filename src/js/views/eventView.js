@@ -34,17 +34,15 @@ class RecipeView extends View {
 	}
 
 	_generateMarkup = function () {
+		console.log(this._data)
 		return `
 		<figure class="recipe__fig">
 			<img src=${
-				// this._data.image_url
-				"https://res.cloudinary.com/scuwebdev/image/upload/v1634224593/scu-stem-building-courtyard-04_cglfdm.jpg"
+				this._data.image_url
+				// "https://res.cloudinary.com/scuwebdev/image/upload/v1634224593/scu-stem-building-courtyard-04_cglfdm.jpg"
 			} alt="${this._data.title}" class="recipe__img" />
 			<h1 class="recipe__title">
-			<span>${
-				// this._data.title
-				"Week 7 Career Advisor Social Hour (STEM + Innovation)"
-			}</span>
+			<span>${this._data.eventName}</span>
 			</h1>
 		</figure>
 
@@ -53,18 +51,17 @@ class RecipeView extends View {
 				<svg class="recipe__info-icon">
 					<use href="${icons}#icon-clock"></use>
 				</svg>
-			<span class="recipe__info-data recipe__info-data--minutes">${
-				// this._data.cooking_time
-				"4:30pm - 5:30pm PST"
-			}</span>
+			<span class="recipe__info-data recipe__info-data--minutes">${this._data.startTime.slice(
+				0,
+				-3,
+			)} - ${this._data.endTime.slice(0, -3)} PST</span>
 			</div>
 			<div class="recipe__info">
 			<svg class="recipe__info-icon">
 				<use href="${icons}#icon-location"></use>
 			</svg>
 			<span class="recipe__info-data recipe__info-data--people">${
-				// this._data.servings
-				"SCDI North Lobby"
+				this._data.location
 			}</span>
 		</div>
 		<div class="recipe__user-generated ${this._data.key ? "" : "hidden"}">
@@ -82,11 +79,7 @@ class RecipeView extends View {
 		<div class="recipe__ingredients">
 			<h2 class="heading--2">Event Infomation</h2>
 			<p class="news__txt">
-            	Utilizing text from government documents, declarations, and other institutional communications artist Bryan Ida creates life-sized portraits in which the linework is his actual handwritten transcription of the sentences and phrases from the selected documents.
-          	</p>
-			<br>
-			<p class="news__txt">
-            	The con.Text series relates these historical events and documents to the lives of the individuals depicted. Each person portrayed is connected to the text used to create their portrait either through direct impact or generational effects of policies.
+            	${this._data.description}
           	</p>
 		</div>
 
@@ -95,7 +88,7 @@ class RecipeView extends View {
 			<p class="recipe__directions-text">
 			This event was hosted by
 			<span class="recipe__publisher">${
-				this._data.publisher
+				this._data.publisherId
 			}</span>. For more information about this event, please check out
 			directions at their website.
 			</p>

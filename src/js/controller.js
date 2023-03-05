@@ -22,7 +22,7 @@ const controlEvent = async function () {
 		eventView.renderSpinner()
 
 		// Loading recipe
-		await model.loadEvent(id)
+		await model.loadSCUEventById(id)
 
 		// Rendering recipe
 		eventView.render(model.state.event)
@@ -42,8 +42,10 @@ const controlSearchResult = async function () {
 		const query = "pizza"
 		if (!query) return
 
+		await model.loadSCUEvents()
+
 		// Load Search Result
-		await model.loadSearchResult(query)
+		await model.loadSCUSearchResult(query)
 
 		// Render Results
 		resultView.render(model.getSearchResultPage())
@@ -78,7 +80,7 @@ const controlHeaderDateChange = function (newDate) {
 	resultHeaderView.updateDate(newDate)
 }
 
-const init = function () {
+const init = async function () {
 	// Publish-Subscriber Pattern (Subscriber)
 	calendarView.addHandlerClickIcon(controlCalendarIcon)
 	calendarView.addHandlerDateChange(controlHeaderDateChange)
