@@ -6,14 +6,12 @@ class ResultView extends View {
 	_parentElement = document.querySelector(".card-container")
 
 	_generateMarkup = function () {
-		console.log(this._data)
 		return this._data
 			.map(result => this._generateSingleMarkup(result))
 			.join("")
 	}
 
 	_generateSingleMarkup = function (result) {
-		console.log(result)
 		const id = window.location.hash.slice(1)
 
 		return `

@@ -81,6 +81,11 @@ const controlHeaderDateChange = function (newDate) {
 	resultHeaderView.updateDate(newDate)
 }
 
+const controlUploadEvent = function (inputEvent) {
+	console.log(inputEvent)
+	model.uploadEvent(inputEvent)
+}
+
 const init = async function () {
 	// Publish-Subscriber Pattern (Subscriber)
 	calendarView.addHandlerClickIcon(controlCalendarIcon)
@@ -88,6 +93,7 @@ const init = async function () {
 	resultHeaderView.addHandlerDateChange(controlCalDateChange)
 	paginationView.addHandlerClick(controlPagination)
 	eventView.addHandlerRender(controlEvent)
+	uploadEventView.addHandlerUpload(controlUploadEvent)
 	controlSearchResult()
 	controlEmpthHash()
 }

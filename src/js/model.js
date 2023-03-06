@@ -41,7 +41,7 @@ export const loadSCUSearchResult = async function (query) {
 				id: e.eventId,
 				title: e.eventName,
 				image_url: e.image,
-				publisher: e.publisherId,
+				publisher: e.publisher,
 			}
 		})
 	} catch (err) {
@@ -79,9 +79,8 @@ export const loadSCUEventById = async function (id) {
 
 export const loadSCUEvents = async function () {
 	try {
-		const data = await getJSON(`${URL}/events`)
+		const data = await getJSON(`${URL}/events/`)
 		state.event = data
-		console.log(data)
 	} catch (err) {
 		throw err
 	}
@@ -89,9 +88,8 @@ export const loadSCUEvents = async function () {
 
 export const loadSCUUser = async function () {
 	try {
-		const data = await getJSON(`${URL}/users`)
+		const data = await getJSON(`${URL}/users/`)
 		// state.event = data.data.recipe
-		console.log(data)
 	} catch (err) {
 		throw err
 	}
@@ -102,4 +100,28 @@ export const getSearchResultPage = function (page = state.search.page) {
 	const start = (page - 1) * state.search.resultPerPage
 	const end = page * state.search.resultPerPage
 	return state.search.result.slice(start, end)
+}
+
+export const uploadEvent = async function (inputEvent) {
+	try {
+		const event = {
+			eventName: inputEvent.eventName,
+			publisher: inputEvent.hostName,
+			image: inputEvent.image,
+			description: inputEvent.description,
+			location: inputEvent.location,
+			createDate: new Date(),
+			eventDate: inputEvent.date,
+			startTime: inputEvent.startTime,
+			endTime: inputEvent.endTime,
+			valid: 1,
+			url: "https://www.scu.edu/events/",
+		}
+		const res = await sendJSON(`${URL}/events/add`, event)
+		console.log(res)
+		// state.event = data.data.recipe
+		// addBookmark(state.recipe)
+	} catch (err) {
+		throw err
+	}
 }

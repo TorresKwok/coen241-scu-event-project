@@ -29,14 +29,14 @@ class UploadEventView extends View {
 		this._window.classList.toggle("hidden")
 	}
 
-	// addHandlerUpload(handler) {
-	// 	this._parentElement.addEventListener("submit", function (e) {
-	// 		e.preventDefault()
-	// 		const dataArr = [...new FormData(this)]
-	// 		const data = Object.fromEntries(dataArr)
-	// 		handler(data)
-	// 	})
-	// }
+	addHandlerUpload(handler) {
+		this._parentElement.addEventListener("submit", function (e) {
+			e.preventDefault()
+			const dataArr = [...new FormData(this)]
+			const data = Object.fromEntries(dataArr)
+			handler(data)
+		})
+	}
 
 	_generateMarkup = function () {}
 }

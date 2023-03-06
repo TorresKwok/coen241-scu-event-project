@@ -33,12 +33,22 @@ class RecipeView extends View {
 		})
 	}
 
+	_parseDate = function (date) {
+		let hour = Number(date.slice(0, 2)),
+			post = ""
+		if (hour <= 12) post = "AM"
+		if (hour > 12) {
+			hour -= 12
+			post = "PM"
+		}
+		return `${hour}:${date.slice(3, 5)} ${post}`
+	}
+
 	_generateMarkup = function () {
-		console.log(this._data)
 		return `
 		<figure class="recipe__fig">
 			<img src=${
-				this._data.image_url
+				this._data.image
 				// "https://res.cloudinary.com/scuwebdev/image/upload/v1634224593/scu-stem-building-courtyard-04_cglfdm.jpg"
 			} alt="${this._data.title}" class="recipe__img" />
 			<h1 class="recipe__title">
@@ -51,10 +61,9 @@ class RecipeView extends View {
 				<svg class="recipe__info-icon">
 					<use href="${icons}#icon-clock"></use>
 				</svg>
-			<span class="recipe__info-data recipe__info-data--minutes">${this._data.startTime.slice(
-				0,
-				-3,
-			)} - ${this._data.endTime.slice(0, -3)} PST</span>
+			<span class="recipe__info-data recipe__info-data--minutes">${this._parseDate(
+				this._data.startTime,
+			)} - ${this._parseDate(this._data.endTime.slice(0, -3))} PST</span>
 			</div>
 			<div class="recipe__info">
 			<svg class="recipe__info-icon">
@@ -88,7 +97,7 @@ class RecipeView extends View {
 			<p class="recipe__directions-text">
 			This event was hosted by
 			<span class="recipe__publisher">${
-				this._data.publisherId
+				this._data.publisher
 			}</span>. For more information about this event, please check out
 			directions at their website.
 			</p>

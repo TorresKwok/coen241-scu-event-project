@@ -425,7 +425,7 @@
 										<input
 											type="text"
 											placeholder="Enter host name"
-											required
+											name="hostName"
 										/>
 									</div>
 
@@ -434,7 +434,7 @@
 										<input
 											type="text"
 											placeholder="Enter host email"
-											required
+											name="hostEmail"
 										/>
 									</div>
 
@@ -443,7 +443,7 @@
 										<input
 											type="number"
 											placeholder="Enter mobile number"
-											required
+											name="hostMobile"
 										/>
 									</div>
 								</div>
@@ -458,20 +458,28 @@
 										<input
 											type="text"
 											placeholder="Enter Event Name"
-											required
+											name="eventName"
 										/>
 									</div>
 
 									<div class="input-field">
 										<label>Event Location</label>
-										<select required>
-											<option disabled selected>
+										<select name="location" required>
+											<option value="" disabled selected>
 												Select Location
 											</option>
-											<option>SCDI Lobby</option>
-											<option>Library</option>
-											<option>SCU Church</option>
-											<option>Lucas Hall</option>
+											<option value="SCDI Lobby">
+												SCDI Lobby
+											</option>
+											<option value="Library">
+												Library
+											</option>
+											<option value="SCU Church">
+												SCU Church
+											</option>
+											<option value="Lucas Hall">
+												Lucas Hall
+											</option>
 										</select>
 									</div>
 
@@ -479,17 +487,26 @@
 										<label>Event Date</label>
 										<input
 											type="date"
+											name="date"
 											placeholder="Enter your issued date"
-											required
 										/>
 									</div>
 
 									<div class="input-field">
-										<label>Event Duration</label>
+										<label>Event Start Time</label>
 										<input
-											type="text"
-											placeholder="Enter Event Duration (in hour)"
-											required
+											type="datetime-local"
+											placeholder="Enter Event Start Time"
+											name="startTime"
+										/>
+									</div>
+
+									<div class="input-field">
+										<label>Event End Time</label>
+										<input
+											type="datetime-local"
+											placeholder="Enter Event End Time"
+											name="endTime"
 										/>
 									</div>
 
@@ -498,16 +515,7 @@
 										<input
 											type="text"
 											placeholder="Enter Image URL"
-											required
-										/>
-									</div>
-
-									<div class="input-field">
-										<label>Event Profile Photo</label>
-										<input
-											type="text"
-											placeholder="Enter Profile Photo URL"
-											required
+											name="image"
 										/>
 									</div>
 
@@ -518,7 +526,7 @@
 										<input
 											type="text"
 											placeholder="Enter Event Description"
-											required
+											name="description"
 										/>
 									</div>
 								</div>
