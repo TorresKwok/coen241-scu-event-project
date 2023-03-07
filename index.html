@@ -24,12 +24,34 @@
 			rel="stylesheet"
 			href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
 		/>
+		<script
+			src="https://kit.fontawesome.com/6a64dac020.js"
+			crossorigin="anonymous"
+		></script>
 		<script defer src="src/js/controller.js" type="module"></script>
 
 		<title>Bronco Event</title>
 	</head>
 
 	<body>
+		<div class="progress-bar">
+			<div class="toast">
+				<div class="toast-content">
+					<i class="fas fa-solid fa-check check"></i>
+
+					<div class="toast-message">
+						<span class="toast-text toast-text-1">Success</span>
+						<span class="toast-text toast-text-2"
+							>Your event has been posted😊
+						</span>
+					</div>
+				</div>
+				<i class="fa-solid fa-xmark toast-close"></i>
+
+				<div class="progress"></div>
+			</div>
+		</div>
+
 		<div class="container">
 			<header class="header">
 				<a href="/">
@@ -421,11 +443,12 @@
 
 								<div class="fields">
 									<div class="input-field">
-										<label>Host Name</label>
+										<label>Host Username</label>
 										<input
 											type="text"
 											placeholder="Enter host name"
 											name="hostName"
+											required
 										/>
 									</div>
 
@@ -435,6 +458,7 @@
 											type="text"
 											placeholder="Enter host email"
 											name="hostEmail"
+											required
 										/>
 									</div>
 
@@ -444,6 +468,7 @@
 											type="number"
 											placeholder="Enter mobile number"
 											name="hostMobile"
+											required
 										/>
 									</div>
 								</div>
@@ -459,6 +484,7 @@
 											type="text"
 											placeholder="Enter Event Name"
 											name="eventName"
+											required
 										/>
 									</div>
 
@@ -489,24 +515,27 @@
 											type="date"
 											name="date"
 											placeholder="Enter your issued date"
+											required
 										/>
 									</div>
 
 									<div class="input-field">
 										<label>Event Start Time</label>
 										<input
-											type="datetime-local"
+											type="time"
 											placeholder="Enter Event Start Time"
 											name="startTime"
+											required
 										/>
 									</div>
 
 									<div class="input-field">
 										<label>Event End Time</label>
 										<input
-											type="datetime-local"
+											type="time"
 											placeholder="Enter Event End Time"
 											name="endTime"
+											required
 										/>
 									</div>
 
@@ -516,6 +545,7 @@
 											type="text"
 											placeholder="Enter Image URL"
 											name="image"
+											required
 										/>
 									</div>
 
@@ -527,6 +557,7 @@
 											type="text"
 											placeholder="Enter Event Description"
 											name="description"
+											required
 										/>
 									</div>
 								</div>

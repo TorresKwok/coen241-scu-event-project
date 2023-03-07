@@ -81,9 +81,11 @@ const controlHeaderDateChange = function (newDate) {
 	resultHeaderView.updateDate(newDate)
 }
 
-const controlUploadEvent = function (inputEvent) {
+const controlUploadEvent = async function (inputEvent) {
 	console.log(inputEvent)
-	model.uploadEvent(inputEvent)
+	const res = await model.uploadEvent(inputEvent)
+	uploadEventView.toggleWindow()
+	uploadEventView.addProgressBar(res)
 }
 
 const init = async function () {

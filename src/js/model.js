@@ -110,17 +110,17 @@ export const uploadEvent = async function (inputEvent) {
 			image: inputEvent.image,
 			description: inputEvent.description,
 			location: inputEvent.location,
-			createDate: new Date(),
 			eventDate: inputEvent.date,
 			startTime: inputEvent.startTime,
 			endTime: inputEvent.endTime,
 			valid: 1,
 			url: "https://www.scu.edu/events/",
 		}
+		console.log(event)
 		const res = await sendJSON(`${URL}/events/add`, event)
 		console.log(res)
-		// state.event = data.data.recipe
-		// addBookmark(state.recipe)
+
+		return res.status === 200
 	} catch (err) {
 		throw err
 	}
