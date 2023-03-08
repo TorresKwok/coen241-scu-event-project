@@ -1,11 +1,12 @@
 import { API_URL, API_KEY, RES_PER_PAGE, URL } from "./config"
 import { getJSON, sendJSON } from "./helper"
 
-const cors = require("cors")
-
 export const state = {
 	event: {},
-	filter: {},
+	filter: {
+		date: "",
+		tags: [],
+	},
 	search: {
 		query: "",
 		result: [],
@@ -124,4 +125,26 @@ export const uploadEvent = async function (inputEvent) {
 	} catch (err) {
 		throw err
 	}
+}
+
+export const loadDateClick = function (date) {
+	console.log(date.toDateString())
+	this.state.filter.date = date
+	this.loadFilteredResult()
+}
+
+export const loadTagClick = function (tagName) {
+	const idx = this.state.filter.tags.findIndex(tag => tag === tagName)
+	if (idx !== -1) {
+		this.state.filter.tags = this.state.filter.tags.filter(
+			tag => tag !== tagName,
+		)
+	} else {
+		this.state.filter.tags.push(tagName)
+	}
+	this.loadFilteredResult()
+}
+
+export const loadFilteredResult = async function () {
+	console.log(this.state.filter)
 }

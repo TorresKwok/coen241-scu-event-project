@@ -1,3 +1,6 @@
+import Toastify from "toastify-js"
+import "toastify-js/src/toastify.css"
+
 import View from "./View"
 
 class UploadEventView extends View {
@@ -9,23 +12,10 @@ class UploadEventView extends View {
 	_btnOpen = document.querySelector(".nav__btn--add-recipe")
 	_btnClose = document.querySelector(".btn--close-modal")
 
-	progressBar = document.querySelector(".progress-bar")
-	toast = document.querySelector(".toast")
-	closeIcon = document.querySelector(".toast-close")
-	progress = document.querySelector(".progress")
-
 	constructor() {
 		super()
 		this._addHandlerShowWindow()
 		this._addHandlerCloseWindow()
-
-		this.closeIcon.addEventListener("click", () => {
-			this.toast.classList.remove("toast-active")
-
-			setTimeout(() => {
-				this.progress.classList.remove("toast-active")
-			}, 300)
-		})
 	}
 
 	_addHandlerShowWindow = function () {
@@ -56,37 +46,46 @@ class UploadEventView extends View {
 		})
 	}
 
-	addProgressBar(flag) {
-		const icon = this.toast.querySelector(".check")
-		const title = this.toast.querySelector(".toast-text-1")
-		const description = this.toast.querySelector(".toast-text-2")
-		if (!flag) {
-			icon.classList.remove("fa-check")
-			icon.classList.add("fa-xmark")
-			title.innerText = "Fail"
-			description.innerText = "Please use another host name☹️"
-		}
+	showToast(flag) {
+		const node = document.createElement("div")
+		node.classList.add("progress-bar")
+		node.classList.add("fadeOut")
+		node.innerHTML = `
+			<div class="toast">
+				<div class="toast-content">
+					<i class="fas fa-solid fa-${flag ? "check" : "xmark"} check"></i>
 
-		if (flag) {
-			icon.classList.remove("fa-xmark")
-			icon.classList.add("fa-check")
-			title.innerText = "Success"
-			description.innerText = "Your event has been posted😊"
-		}
+					<div class="toast-message">
+						<span class="toast-text toast-text-1">${flag ? "Success" : "Fail"}</span>
+						<span class="toast-text toast-text-2"
+							>${flag ? "Your event has been posted😊" : "Please use another host name☹️"}
+						</span>
+					</div>
+				</div>
 
-		let timer1, timer2
-		this.toast.classList.add("toast-active")
-		this.progress.classList.add("toast-active")
+				<div class="progress"></div>
+			</div>
+		`
 
-		timer1 = setTimeout(() => {
-			this.toast.classList.remove("toast-active")
-		}, 3000) //1s = 1000 milliseconds
-
-		timer2 = setTimeout(() => {
-			this.progress.classList.remove("toast-active")
-		}, 3300)
-
-		// this.progressBar.remove()
+		Toastify({
+			node: node,
+			duration: 3000,
+			newWindow: true,
+			close: false,
+			gravity: "top", // `top` or `bottom`
+			position: "right", // `left`, `center` or `right`
+			stopOnFocus: true, // Prevents dismissing of toast on hover
+			className: "progress fadeOut",
+			style: {
+				background: "#fff",
+				fontSize: "16px",
+				fontWeight: 400,
+				opacity: 0.95,
+				borderRadius: "20px",
+				color: "#666666",
+			},
+			onClick: () => {},
+		}).showToast()
 	}
 
 	_generateMarkup = function () {}

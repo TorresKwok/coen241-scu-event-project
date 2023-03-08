@@ -22,36 +22,31 @@
 
 		<link
 			rel="stylesheet"
-			href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+			type="text/css"
+			href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
 		/>
+
 		<script
 			src="https://kit.fontawesome.com/6a64dac020.js"
 			crossorigin="anonymous"
 		></script>
+
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/toastify-js"
+		></script>
+
+		<script
+			src="https://kit.fontawesome.com/6a64dac020.js"
+			crossorigin="anonymous"
+		></script>
+
 		<script defer src="src/js/controller.js" type="module"></script>
 
 		<title>Bronco Event</title>
 	</head>
 
 	<body>
-		<div class="progress-bar">
-			<div class="toast">
-				<div class="toast-content">
-					<i class="fas fa-solid fa-check check"></i>
-
-					<div class="toast-message">
-						<span class="toast-text toast-text-1">Success</span>
-						<span class="toast-text toast-text-2"
-							>Your event has been posted😊
-						</span>
-					</div>
-				</div>
-				<i class="fa-solid fa-xmark toast-close"></i>
-
-				<div class="progress"></div>
-			</div>
-		</div>
-
 		<div class="container">
 			<header class="header">
 				<a href="/">
@@ -159,7 +154,7 @@
 				<div class="checkbox-container">
 					<div class="h2 checkbox-title">Show only</div>
 					<div class="checkboxs">
-						<input class="checkbox" type="checkbox" id="box-1" />
+						<!-- <input class="checkbox" type="checkbox" id="box-1" />
 						<label class="checkbox" for="box-1"
 							>Online events</label
 						>
@@ -194,7 +189,7 @@
 						<input class="checkbox" type="checkbox" id="box-9" />
 						<label class="checkbox" for="box-9"
 							>Jesuit School of Theology</label
-						>
+						> -->
 					</div>
 				</div>
 			</div>
@@ -542,11 +537,34 @@
 									<div class="input-field">
 										<label>Event Image</label>
 										<input
-											type="text"
+											type="url"
 											placeholder="Enter Image URL"
 											name="image"
 											required
 										/>
+									</div>
+
+									<div class="input-field">
+										<label>Event Type</label>
+										<select name="type" required>
+											<option value="" disabled selected>
+												Select Event Type
+											</option>
+											<option value="sport">Sport</option>
+											<option value="Art&Music">
+												Art & Music
+											</option>
+											<option value="academic">
+												Academic
+											</option>
+											<option value="party">Party</option>
+											<option value="theology">
+												Theology
+											</option>
+											<option value="online">
+												Online
+											</option>
+										</select>
 									</div>
 
 									<div

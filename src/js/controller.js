@@ -5,6 +5,7 @@ import eventView from "./views/eventView"
 import paginationView from "./views/paginationView"
 import resultHeaderView from "./views/resultHeaderView"
 import uploadEventView from "./views/uploadEventView"
+import checkboxView from "./views/checkboxView"
 import { MODAL_CLOSE_SEC } from "./config"
 import { getJSON, sendJSON } from "./helper"
 
@@ -79,13 +80,18 @@ const controlCalDateChange = function (newDate) {}
 
 const controlHeaderDateChange = function (newDate) {
 	resultHeaderView.updateDate(newDate)
+	model.loadDateClick(newDate)
+}
+
+const controlTagClick = function (tagName) {
+	model.loadTagClick(tagName)
 }
 
 const controlUploadEvent = async function (inputEvent) {
 	console.log(inputEvent)
 	const res = await model.uploadEvent(inputEvent)
 	uploadEventView.toggleWindow()
-	uploadEventView.addProgressBar(res)
+	uploadEventView.showToast(res)
 }
 
 const init = async function () {
@@ -96,6 +102,8 @@ const init = async function () {
 	paginationView.addHandlerClick(controlPagination)
 	eventView.addHandlerRender(controlEvent)
 	uploadEventView.addHandlerUpload(controlUploadEvent)
+	checkboxView.addHandlerTagClick(controlTagClick)
+	checkboxView.render("render")
 	controlSearchResult()
 	controlEmpthHash()
 }
