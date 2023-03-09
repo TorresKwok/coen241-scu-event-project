@@ -83,8 +83,8 @@ const controlHeaderDateChange = function (newDate) {
 	model.loadDateClick(newDate)
 }
 
-const controlTagClick = function (tagName) {
-	model.loadTagClick(tagName)
+const controlTagClick = function (tag) {
+	model.loadTagClick(tag)
 }
 
 const controlUploadEvent = async function (inputEvent) {

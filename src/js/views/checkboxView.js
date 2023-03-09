@@ -10,28 +10,44 @@ class CheckboxView extends View {
 		this._parentElement.addEventListener("click", e => {
 			if (!e.target.classList.contains("checkboxClick")) return
 
-			hanlder(e.target.getAttribute("value"))
+			if (e.target.classList.contains("checkboxLocation")) {
+				hanlder({type: "location", value: e.target.getAttribute("value")})
+			}
+
+			if (e.target.classList.contains("checkboxTag")) {
+				hanlder({type: "tag", value: e.target.getAttribute("value")})
+			}
+			// hanlder(e.target.getAttribute("value"))
 		})
 	}
 
 	_generateMarkup = function () {
 		const locationHtml = this._locations
-			.map((location, idx) => this._generateSingleMarkup(location, idx))
+			.map((location, idx) => this._generateSingleLocationMarkup(location, idx))
 			.join("")
 
 		const tagHtml = this._tags
 			.map((tag, idx) =>
-				this._generateSingleMarkup(tag, idx + this._locations.length),
+				this._generateSingleTagMarkup(tag, idx + this._locations.length),
 			)
 			.join("")
 
 		return locationHtml + "<br />" + tagHtml
 	}
 
-	_generateSingleMarkup = function (tag, idx) {
+	_generateSingleLocationMarkup = function (tag, idx) {
 		return `
 			<input class="checkbox" type="checkbox" id="box-${idx}" />
-			<label class="checkbox checkboxClick" for="box-${idx}" value="${tag}">
+			<label class="checkbox checkboxClick checkboxLocation" for="box-${idx}" value="${tag}">
+				${tag}
+			</label>
+		`
+	}
+
+	_generateSingleTagMarkup = function (tag, idx) {
+		return `
+			<input class="checkbox" type="checkbox" id="box-${idx}" />
+			<label class="checkbox checkboxClick checkboxTag" for="box-${idx}" value="${tag}">
 				${tag}
 			</label>
 		`

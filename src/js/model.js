@@ -1,11 +1,12 @@
 import { API_URL, API_KEY, RES_PER_PAGE, URL } from "./config"
-import { getJSON, sendJSON } from "./helper"
+import { getJSON, sendJSON, parseDate } from "./helper"
 
 export const state = {
 	event: {},
 	filter: {
-		date: "",
+		date: [],
 		tags: [],
+		locations: [],
 	},
 	search: {
 		query: "",
@@ -128,20 +129,35 @@ export const uploadEvent = async function (inputEvent) {
 }
 
 export const loadDateClick = function (date) {
-	console.log(date.toDateString())
-	this.state.filter.date = date
+	const parsedDate = parseDate(date)
+	this.state.filter.date[0] = parsedDate
 	this.loadFilteredResult()
 }
 
 export const loadTagClick = function (tagName) {
-	const idx = this.state.filter.tags.findIndex(tag => tag === tagName)
-	if (idx !== -1) {
-		this.state.filter.tags = this.state.filter.tags.filter(
-			tag => tag !== tagName,
-		)
-	} else {
-		this.state.filter.tags.push(tagName)
+	const type = tagName.type
+	if (type === "location") {
+		const idx = this.state.filter.locations.findIndex(tag => tag === tagName.value)
+		if (idx !== -1) {
+			this.state.filter.locations = this.state.filter.locations.filter(
+				tag => tag !== tagName.value,
+			)
+		} else {
+			this.state.filter.locations.push(tagName.value)
+		}
+	} 
+
+	if (type === "tag") {
+		const idx = this.state.filter.tags.findIndex(tag => tag === tagName.value)
+		if (idx !== -1) {
+			this.state.filter.tags = this.state.filter.tags.filter(
+				tag => tag !== tagName.value,
+			)
+		} else {
+			this.state.filter.tags.push(tagName.value)
+		}
 	}
+
 	this.loadFilteredResult()
 }
 
