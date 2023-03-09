@@ -1,12 +1,17 @@
 import { API_URL, API_KEY, RES_PER_PAGE, URL } from "./config"
-import { getJSON, sendJSON, parseDate } from "./helper"
+import {
+	getJSON,
+	sendUploadEventJSON,
+	sendFilterJSON,
+	parseDate,
+} from "./helper"
 
 export const state = {
 	event: {},
 	filter: {
-		date: [],
-		tags: [],
-		locations: [],
+		event_date: [],
+		tag: [],
+		location: [],
 	},
 	search: {
 		query: "",
@@ -15,24 +20,6 @@ export const state = {
 		resultPerPage: RES_PER_PAGE,
 	},
 }
-
-// export const loadSearchResult = async function (query) {
-// 	try {
-// 		const data = await getJSON(`${API_URL}?search=${query}&key=${API_KEY}`)
-// 		state.search.query = query
-// 		state.search.page = 1
-// 		state.search.result = data.data.recipes.map(recipe => {
-// 			return {
-// 				id: recipe.id,
-// 				title: recipe.title,
-// 				image_url: recipe.image_url,
-// 				publisher: recipe.publisher,
-// 			}
-// 		})
-// 	} catch (err) {
-// 		throw err
-// 	}
-// }
 
 export const loadSCUSearchResult = async function (query) {
 	try {
@@ -69,11 +56,6 @@ export const loadSCUEventById = async function (id) {
 	try {
 		const data = await getJSON(`${URL}/events/${id}`)
 		state.event = data
-		// if (state.bookmarks.some(bookmark => bookmark.id === id)) {
-		// 	state.recipe.bookmarked = true
-		// } else {
-		// 	state.recipe.bookmarked = false
-		// }
 	} catch (err) {
 		throw err
 	}
@@ -117,50 +99,61 @@ export const uploadEvent = async function (inputEvent) {
 			endTime: inputEvent.endTime,
 			valid: 1,
 			url: "https://www.scu.edu/events/",
+			tag: inputEvent.tag,
 		}
-		console.log(event)
-		const res = await sendJSON(`${URL}/events/add`, event)
-		console.log(res)
-
+		const res = await sendUploadEventJSON(`${URL}/events/add`, event)
 		return res.status === 200
 	} catch (err) {
 		throw err
 	}
 }
 
-export const loadDateClick = function (date) {
+export const loadDateClick = async function (date) {
 	const parsedDate = parseDate(date)
-	this.state.filter.date[0] = parsedDate
-	this.loadFilteredResult()
+	if (parsedDate === this.state.filter.event_date[0]) {
+		this.state.filter.event_date.pop()
+	} else {
+		this.state.filter.event_date[0] = parsedDate
+	}
+	await this.loadFilteredResult()
+	return this.state.filter.event_date.length === 1
 }
 
-export const loadTagClick = function (tagName) {
+export const loadTagClick = async function (tagName) {
 	const type = tagName.type
 	if (type === "location") {
-		const idx = this.state.filter.locations.findIndex(tag => tag === tagName.value)
+		const idx = this.state.filter.location.findIndex(
+			tag => tag === tagName.value,
+		)
 		if (idx !== -1) {
-			this.state.filter.locations = this.state.filter.locations.filter(
+			this.state.filter.location = this.state.filter.location.filter(
 				tag => tag !== tagName.value,
 			)
 		} else {
-			this.state.filter.locations.push(tagName.value)
-		}
-	} 
-
-	if (type === "tag") {
-		const idx = this.state.filter.tags.findIndex(tag => tag === tagName.value)
-		if (idx !== -1) {
-			this.state.filter.tags = this.state.filter.tags.filter(
-				tag => tag !== tagName.value,
-			)
-		} else {
-			this.state.filter.tags.push(tagName.value)
+			this.state.filter.location.push(tagName.value)
 		}
 	}
 
-	this.loadFilteredResult()
+	if (type === "tag") {
+		const idx = this.state.filter.tag.findIndex(
+			tag => tag === tagName.value,
+		)
+		if (idx !== -1) {
+			this.state.filter.tag = this.state.filter.tag.filter(
+				tag => tag !== tagName.value,
+			)
+		} else {
+			this.state.filter.tag.push(tagName.value)
+		}
+	}
+
+	await this.loadFilteredResult()
 }
 
 export const loadFilteredResult = async function () {
-	console.log(this.state.filter)
+	const data = await sendFilterJSON(
+		`${URL}/events/searchEvents`,
+		this.state.filter,
+	)
+	state.event = data
 }

@@ -6,6 +6,10 @@ class CalendarView extends View {
 	_parentElement = document.querySelector(".calendar-container")
 	_prevNextIcon = document.querySelectorAll(".icons span")
 	_date = new Date()
+	_today = new Date()
+	_nowYear = this._today.getFullYear()
+	_nowMonth = this._today.getMonth()
+	_nowDate = this._today.getDate()
 	_curYear = this._date.getFullYear()
 	_curMonth = this._date.getMonth()
 	_curDate = this._date.getDate()
@@ -43,10 +47,18 @@ class CalendarView extends View {
 			const dayTag = e.target.closest(".day")
 			if (!dayTag || dayTag.classList.contains("inactive")) return
 
-			this._curDate = dayTag.textContent
-			this._date = new Date(this._curYear, this._curMonth, this._curDate)
-
-			this.render("render again")
+			if (this._curDate === dayTag.textContent) {
+				this._curDate = new Date().getDate()
+				this.render("click again")
+			} else {
+				this._curDate = dayTag.textContent
+				this._date = new Date(
+					this._curYear,
+					this._curMonth,
+					this._curDate,
+				)
+				this.render("render again")
+			}
 
 			handler(this._date)
 		})
@@ -86,11 +98,23 @@ class CalendarView extends View {
 		}
 
 		for (let i = 1; i <= lastDateOfMonth; i++) {
-			const isToday =
+			const isClick =
+				this._data !== "click again" &&
 				i === this._date.getDate() &&
 				this._curMonth === this._date.getMonth() &&
 				this._curYear === this._date.getFullYear()
-			liTag += `<li class="${isToday ? "active day" : "day"}">${i}</li>`
+
+			const isToday =
+				i === this._today.getDate() &&
+				this._curMonth === this._today.getMonth() &&
+				this._curYear === this._today.getFullYear()
+
+			if (isToday) {
+				liTag += `<li class="active day">${i}</li>`
+			} else
+				liTag += `<li class="${
+					isClick ? "click day" : "day"
+				}">${i}</li>`
 		}
 
 		for (let i = lastDayOfMonth; i < 6; i++) {

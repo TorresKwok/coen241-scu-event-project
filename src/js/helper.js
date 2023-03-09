@@ -24,7 +24,7 @@ export const getJSON = async function (url) {
 	}
 }
 
-export const sendJSON = async function (url, obj) {
+export const sendUploadEventJSON = async function (url, obj) {
 	try {
 		const fetchPro = fetch(url, {
 			method: "POST",
@@ -41,11 +41,29 @@ export const sendJSON = async function (url, obj) {
 	}
 }
 
-export const parseDate = function(date) {
+export const sendFilterJSON = async function (url, obj) {
+	try {
+		const fetchPro = fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(obj),
+		})
+
+		const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)])
+		const data = await res.json()
+		return data
+	} catch (err) {
+		throw err
+	}
+}
+
+export const parseDate = function (date) {
 	// Get year, month, and day part from the date
-	const year = date.toLocaleString("default", { year: "numeric" });
-	const month = date.toLocaleString("default", { month: "2-digit" });
-	const day = date.toLocaleString("default", { day: "2-digit" });
+	const year = date.toLocaleString("default", { year: "numeric" })
+	const month = date.toLocaleString("default", { month: "2-digit" })
+	const day = date.toLocaleString("default", { day: "2-digit" })
 
 	// Generate yyyy-mm-dd date string
 	const formattedDate = `${year}-${month}-${day}`

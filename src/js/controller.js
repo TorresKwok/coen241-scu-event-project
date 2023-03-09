@@ -7,7 +7,7 @@ import resultHeaderView from "./views/resultHeaderView"
 import uploadEventView from "./views/uploadEventView"
 import checkboxView from "./views/checkboxView"
 import { MODAL_CLOSE_SEC } from "./config"
-import { getJSON, sendJSON } from "./helper"
+import { getJSON, parseDate, sendJSON } from "./helper"
 
 const recipeContainer = document.querySelector(".recipe")
 
@@ -46,14 +46,7 @@ const controlSearchResult = async function () {
 
 		await model.loadSCUEvents()
 
-		// Load Search Result
-		await model.loadSCUSearchResult(query)
-
-		// Render Results
-		resultView.render(model.getSearchResultPage())
-
-		// Render initial pagination buttons
-		paginationView.render(model.state.search)
+		await renderEventList(query)
 	} catch (err) {
 		throw err
 	}
@@ -78,20 +71,34 @@ const controlEmpthHash = function () {
 
 const controlCalDateChange = function (newDate) {}
 
-const controlHeaderDateChange = function (newDate) {
-	resultHeaderView.updateDate(newDate)
-	model.loadDateClick(newDate)
+const controlHeaderDateChange = async function (newDate) {
+	const flag = await model.loadDateClick(newDate)
+	resultHeaderView.updateDate(flag ? newDate : new Date())
+	await renderEventList("pizza")
 }
 
-const controlTagClick = function (tag) {
-	model.loadTagClick(tag)
+const controlTagClick = async function (tag) {
+	await model.loadTagClick(tag)
+
+	await renderEventList("pizza")
 }
 
 const controlUploadEvent = async function (inputEvent) {
 	console.log(inputEvent)
-	const res = await model.uploadEvent(inputEvent)
+	const isSucceed = await model.uploadEvent(inputEvent)
 	uploadEventView.toggleWindow()
-	uploadEventView.showToast(res)
+	uploadEventView.showToast(isSucceed)
+}
+
+const renderEventList = async function (query) {
+	// Load Search Result
+	await model.loadSCUSearchResult(query)
+
+	// Render Results
+	resultView.render(model.getSearchResultPage())
+
+	// Render initial pagination buttons
+	paginationView.render(model.state.search)
 }
 
 const init = async function () {
