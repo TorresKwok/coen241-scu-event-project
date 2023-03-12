@@ -72,12 +72,14 @@ const controlEmpthHash = function () {
 const controlCalDateChange = function (newDate) {}
 
 const controlHeaderDateChange = async function (newDate) {
+	console.log(model.state)
 	const flag = await model.loadDateClick(newDate)
 	resultHeaderView.updateDate(flag ? newDate : new Date())
 	await renderEventList("pizza")
 }
 
 const controlTagClick = async function (tag) {
+	console.log(model.state)
 	await model.loadTagClick(tag)
 
 	await renderEventList("pizza")
