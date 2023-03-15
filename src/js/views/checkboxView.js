@@ -2,8 +2,14 @@ import View from "./View"
 
 class CheckboxView extends View {
 	_parentElement = document.querySelector(".checkboxs")
-	_locations = ["SCDI Lobby", "Library", "SCU Church", "Lucas Hall"]
-	_tags = ["Sports", "Art & Music", "Academic", "Theology", "Online"]
+	_locations = [
+		"SCDI Lobby",
+		"Library",
+		"SCU Church",
+		"Lucas Hall",
+		"Leavey Center",
+	]
+	_tags = ["Sports", "Art & Music", "Academic", "Party", "Theology", "Online"]
 	_tagsArr = [...this._locations, ...this._tags]
 
 	addHandlerTagClick = function (hanlder) {
@@ -11,11 +17,14 @@ class CheckboxView extends View {
 			if (!e.target.classList.contains("checkboxClick")) return
 
 			if (e.target.classList.contains("checkboxLocation")) {
-				hanlder({type: "location", value: e.target.getAttribute("value")})
+				hanlder({
+					type: "location",
+					value: e.target.getAttribute("value"),
+				})
 			}
 
 			if (e.target.classList.contains("checkboxTag")) {
-				hanlder({type: "tag", value: e.target.getAttribute("value")})
+				hanlder({ type: "tag", value: e.target.getAttribute("value") })
 			}
 			// hanlder(e.target.getAttribute("value"))
 		})
@@ -23,12 +32,17 @@ class CheckboxView extends View {
 
 	_generateMarkup = function () {
 		const locationHtml = this._locations
-			.map((location, idx) => this._generateSingleLocationMarkup(location, idx))
+			.map((location, idx) =>
+				this._generateSingleLocationMarkup(location, idx),
+			)
 			.join("")
 
 		const tagHtml = this._tags
 			.map((tag, idx) =>
-				this._generateSingleTagMarkup(tag, idx + this._locations.length),
+				this._generateSingleTagMarkup(
+					tag,
+					idx + this._locations.length,
+				),
 			)
 			.join("")
 

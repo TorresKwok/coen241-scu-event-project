@@ -1,4 +1,5 @@
-import * as model from "./model"
+// import * as model from "./model"
+import model from "./model"
 import calendarView from "./views/calendarView"
 import resultView from "./views/resultView"
 import eventView from "./views/eventView"
@@ -74,6 +75,7 @@ const controlCalDateChange = function (newDate) {}
 const controlHeaderDateChange = async function (newDate) {
 	console.log(model.state)
 	const flag = await model.loadDateClick(newDate)
+	console.log(model.state)
 	resultHeaderView.updateDate(flag ? newDate : new Date())
 	await renderEventList("pizza")
 }
@@ -81,6 +83,7 @@ const controlHeaderDateChange = async function (newDate) {
 const controlTagClick = async function (tag) {
 	console.log(model.state)
 	await model.loadTagClick(tag)
+	console.log(model.state)
 
 	await renderEventList("pizza")
 }
